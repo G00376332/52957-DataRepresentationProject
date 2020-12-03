@@ -44,3 +44,35 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/home')
+
+def findById(id):
+    if not 'username' in session:
+        abort(401)
+
+    return jsonify(balticDao.findById(id))
+
+#curl "http://127.0.0.1:5000/harvests/101"
+
+@app.route('/harvests', methods=['POST'])
+
+def create():
+
+    # Check that the request has JSON data (if not returns a 400 error)
+    if not request.json:
+        abort(400) 
+
+    harvest={
+        "id": request.json["id"],
+        "employeeName": request.json["employeeName"],
+        "fieldSection":request.json["fieldSection"],
+        "variety":request.json["variety"],
+        "quantity":request.json["quantity"]
+    } #read the request object and create a new harvest
+
+    return jsonify(balticDao.create(harvest))
+
+
+# This is a put and it takes in the id from the url
+@app.route('/harvests/<id>', methods =['PUT'])
+
+def update(id):
