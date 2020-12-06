@@ -27,15 +27,7 @@ function showSlides() {
 
 var textIndex = 0;
 
-function showIdxText() {
-  // Create an array with text to loop through.
-  var txt = ["Your partner in blueberries","Our Promise", "Your Satisfaction","Our Quality","Your Profit","38 Years of Experience","14 Blueberry Varieties","105 Days of the Season"];
-  textIndex++;
-  if (textIndex > txt.length) {textIndex = 1}
-  document.getElementById("idx-text").innerHTML = txt[textIndex-1];
-  // Change the text every 5 seconds. Make the time half of banner animation time in CSS file for the nicer swap effect.
-  setTimeout(showIdxText, 5000); 
-}
+
 
 // Login section
 
@@ -76,3 +68,34 @@ function scrollFunction() {
 function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
+
+/ This part display database section
+
+
+
+}
+
+function showUpdate(thisElem) {
+	var rowElement = thisElem.parentNode.parentNode;
+	harvest = readHarvestFromRow(rowElement)
+	populateForm(harvest)
+
+	document.getElementById('display').style.display = "none"
+	document.getElementById('update-button').style.display = "block"
+	document.getElementById('create-button').style.display = "none"
+	document.getElementById('create-update').style.display = "block"
+	document.getElementById("create-update-title").innerHTML = "Update Harvest";
+}
+
+
+function readHarvestFromRow(rowElement) {
+	harvest = {}
+	harvest.id = rowElement.getAttribute("id");
+	harvest.employeeName = rowElement.cells[1].firstChild.textContent
+	harvest.fieldSection = rowElement.cells[2].firstChild.textContent
+	harvest.variety = rowElement.cells[3].firstChild.textContent
+	harvest.quantity = rowElement.cells[4].firstChild.textContent
+
+	return harvest
+
+}
