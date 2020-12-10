@@ -28,7 +28,8 @@ class BalticDao:
         self.db.commit()
         cursor.close()
         return cursor.lastrowid
-   def getAll(self):
+
+    def getAll(self):
         cursor = self.db.cursor()
         sql = 'select * from harvest'
         cursor.execute(sql)
@@ -79,7 +80,7 @@ class BalticDao:
                 value = result[i]
                 harvest[colName] = value
         return harvest
-		
+
     def checkUser(self, username, password):
         cursor = self.db.cursor()
         sql = "select * from users where username = %s and password = %s"

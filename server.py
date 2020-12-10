@@ -7,6 +7,7 @@ from BalticDao import balticDao
 app = Flask(__name__,
             static_url_path='',
             static_folder='templates')
+app.secret_key = 'U83phaeTOjs4snh3s16Xm1lpQx1x1tYN'
 
 @app.route('/')
 def home():
@@ -45,6 +46,38 @@ def logout():
 
 @app.route('/home')
 
+def homepage():
+    pagetitle = "HomePage"
+
+    if not 'username' in session:
+        return redirect(url_for('login'))
+
+    return render_template('index.html', mytitle=pagetitle)
+
+
+@app.route('/harvestdata')
+
+def harvestData():
+
+    if not 'username' in session:
+        return redirect(url_for('login'))
+
+    return render_template('harvestviewer.html')
+
+
+@app.route('/harvests')
+
+def getAll():
+
+    if not 'username' in session:
+        abort(401)
+
+    return jsonify(balticDao.getAll())
+
+#curl "http://127.0.0.1:5000/harvests"
+
+@app.route('/harvests/<id>')
+
 def findById(id):
     if not 'username' in session:
         abort(401)
@@ -76,3 +109,35 @@ def create():
 @app.route('/harvests/<id>', methods =['PUT'])
 
 def update(id):
+    foundharvest=balticDao.findById(id)
+
+    if foundharvest == {}:
+        return jsonify({}), 404
+
+    if not request.json:
+        abort(400)
+
+    currentharvest = foundharvest
+
+    if 'employeeName' in request.json:
+        currentharvest['employeeName'] = request.json['employeeName']
+    if 'fieldSection' in request.json:
+        currentharvest['fieldSection'] = request.json['fieldSection']
+    if 'variety' in request.json:
+        currentharvest['variety'] = request.json['variety']
+    if 'quantity' in request.json:
+        currentharvest['quantity'] = request.json['quantity']
+
+    balticDao.update(currentharvest)
+
+    return jsonify(currentharvest)
+
+@app.route('/harvests/<id>', methods =['DELETE'])
+
+def delete(id):
+    balticDao.delete(id)
+    return  jsonify( {'Done':True })
+
+#Run Flask
+if __name__ == '__main__' :
+    app.run(debug= True)
