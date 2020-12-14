@@ -1,6 +1,6 @@
 <h1 align="center"> Data Representation Project 2020  </h1><br>
-<h3 align="left"><i>Maciej Burel<i> </h3>
-<h3 align="left"><i>G00376332<i> </h3><br><br>
+<h3 align="left">Maciej Burel</h3>
+<h3 align="left">G00376332</h3><br><br>
 
 ### This folder contains the final project for the Data Representation and Querying Module.
 
@@ -113,7 +113,7 @@ By pressing login button from the menu a login box will pop up. <br>
 
 When access is granted the user can view, create, update and delete harvest data.
 
-![Login box](img/data.jpg)<br>
+![harvest data](img/data.jpg)<br>
 
 
 
