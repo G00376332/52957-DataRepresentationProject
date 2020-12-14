@@ -18,7 +18,7 @@ The project uses the following files:
 | templates/css/main.css        |   Main css file for HTML pages                                                                         |
 | requirements.txt              |   List of necessary packages                                                                           |
 
-### My Project is hosted on [Pythonanywhere](baltic.pythonanywhere.com)
+### My Project is hosted on [Pythonanywhere - baltic.pythonanywhere.com](baltic.pythonanywhere.com)
 ***
 
 Login details are follows:
